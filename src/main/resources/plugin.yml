@@ -1,0 +1,8 @@
+name: ChristmasEvent
+version: VERSION
+
+main: me.florestanii.christmasevent.ChristmasEvent
+
+commands:
+  addpresent:
+    usage: /<command>
