@@ -50,6 +50,11 @@
             <version>1.0.9</version>
             <scope>compile</scope>
         </dependency>
+		<dependency>
+			<groupId>de.craften.plugins.playerdatastore</groupId>
+			<artifactId>playerdatastore-api</artifactId>
+			<version>1.0.0</version>
+		</dependency>
     </dependencies>
 
     <build>

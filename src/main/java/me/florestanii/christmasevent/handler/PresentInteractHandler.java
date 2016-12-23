@@ -1,4 +1,4 @@
-package me.florestanii.christmasevent.commands;
+package me.florestanii.christmasevent.handler;
 
 import me.florestanii.christmasevent.ChristmasEvent;
 import me.florestanii.christmasevent.Present;

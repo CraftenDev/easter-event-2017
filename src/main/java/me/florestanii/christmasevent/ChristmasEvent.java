@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import me.florestanii.christmasevent.commands.PresentCommand;
-import me.florestanii.christmasevent.commands.PresentInteractHandler;
+import me.florestanii.christmasevent.handler.PresentInteractHandler;
+import me.florestanii.christmasevent.handler.PresentParticles;
 import me.florestanii.christmasevent.util.CustomSkull;
 
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -53,6 +55,8 @@ public class ChristmasEvent extends JavaPlugin{
 		service = getServer().getServicesManager().getRegistration(PlayerDataStoreService.class).getProvider();
 		
 		loadPresents();
+		
+		new PresentParticles(this);
 		
 		super.onEnable();
 	}
@@ -132,6 +136,7 @@ public class ChristmasEvent extends JavaPlugin{
 	
 	public void collect(Player p, Present present) {
 		getPlayerStore(p).put("present." + present.getId(), "true");
+		p.playSound(p.getLocation(), Sound.LEVEL_UP, 0.4f, 1);
 	}
 	
 	private Location loadLocation(ConfigurationSection section) {
