@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import me.florestanii.christmasevent.commands.PresentCommand;
+import me.florestanii.christmasevent.commands.PresentInteractHanlder;
 import me.florestanii.christmasevent.util.CustomSkull;
 
 import org.bukkit.Location;
@@ -12,6 +13,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class ChristmasEvent extends JavaPlugin{
 
+	private static ChristmasEvent plugin;
+	
 	private final ArrayList<Location> presents = new ArrayList<Location>();
 	
 	private final String[] skins = new String[]{
@@ -30,7 +33,7 @@ public class ChristmasEvent extends JavaPlugin{
 	
 	@Override
 	public void onLoad() {
-		
+		plugin = this;
 		super.onLoad();
 	}
 	
@@ -38,6 +41,8 @@ public class ChristmasEvent extends JavaPlugin{
 	public void onEnable() {
 		
 		getCommand("addpresent").setExecutor(new PresentCommand(this));
+		
+		getServer().getPluginManager().registerEvents(new PresentInteractHanlder(this), this);
 		
 		loadPresents();
 		
@@ -59,6 +64,7 @@ public class ChristmasEvent extends JavaPlugin{
 		
 		for (String key : section.getKeys(false)) {
 			Location loc = loadLocation(section.getConfigurationSection(key));
+			presents.add(loc);
 			loadPresent(loc);
 		}
 		
@@ -88,8 +94,12 @@ public class ChristmasEvent extends JavaPlugin{
 	public ArrayList<Location> getPresents() {
 		return presents;
 	}
+
+	public boolean isPresent(Location loc) {
+		return presents.contains(loc);
+	}
 	
-	public Location loadLocation(ConfigurationSection section) {
+	private Location loadLocation(ConfigurationSection section) {
 		try {
 			return new Location(getServer().getWorld(section.getString("world")), section.getDouble("x"), section.getDouble("y"), section.getDouble("z"),(float) section.getDouble("yaw"),(float) section.getDouble("pitch"));
 		} catch (Exception e) {
@@ -98,7 +108,7 @@ public class ChristmasEvent extends JavaPlugin{
 		
 	}
 	
-	public void saveLocation(ConfigurationSection section, Location loc) {
+	private void saveLocation(ConfigurationSection section, Location loc) {
 		if (loc != null) {
 			section.set("world", loc.getWorld().getName());
 			section.set("x", loc.getX());
@@ -108,4 +118,9 @@ public class ChristmasEvent extends JavaPlugin{
 			section.set("pitch", loc.getPitch());
 		}
 	}
+	
+	public static ChristmasEvent getPlugin() {
+		return plugin;
+	}
+	
 }
