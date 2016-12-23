@@ -4,18 +4,22 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import me.florestanii.christmasevent.commands.PresentCommand;
-import me.florestanii.christmasevent.commands.PresentInteractHanlder;
+import me.florestanii.christmasevent.commands.PresentInteractHandler;
 import me.florestanii.christmasevent.util.CustomSkull;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import de.craften.plugins.playerdatastore.api.PlayerDataStore;
+import de.craften.plugins.playerdatastore.api.PlayerDataStoreService;
 
 public class ChristmasEvent extends JavaPlugin{
 
 	private static ChristmasEvent plugin;
 	
-	private final ArrayList<Location> presents = new ArrayList<Location>();
+	private final ArrayList<Present> presents = new ArrayList<Present>();
 	
 	private final String[] skins = new String[]{
 			"http://textures.minecraft.net/texture/9715f537fe7af6f5aa6eb98ad6902c13d05fb36c16b311ed832b09b598828",
@@ -31,6 +35,8 @@ public class ChristmasEvent extends JavaPlugin{
 			"http://textures.minecraft.net/texture/4acb3c1e1b34f8734aedfabd1e1f5e0b280bef924fb8bbf3e692d2538266f4",
 			"http://textures.minecraft.net/texture/10c75a05b344ea043863974c180ba817aea68678cbea5e4ba395f74d4803d1d"};
 	
+	private PlayerDataStoreService service;
+	
 	@Override
 	public void onLoad() {
 		plugin = this;
@@ -42,7 +48,9 @@ public class ChristmasEvent extends JavaPlugin{
 		
 		getCommand("addpresent").setExecutor(new PresentCommand(this));
 		
-		getServer().getPluginManager().registerEvents(new PresentInteractHanlder(this), this);
+		getServer().getPluginManager().registerEvents(new PresentInteractHandler(this), this);
+		
+		service = getServer().getServicesManager().getRegistration(PlayerDataStoreService.class).getProvider();
 		
 		loadPresents();
 		
@@ -64,14 +72,14 @@ public class ChristmasEvent extends JavaPlugin{
 		
 		for (String key : section.getKeys(false)) {
 			Location loc = loadLocation(section.getConfigurationSection(key));
-			presents.add(loc);
+			presents.add(new Present(key, loc));
 			loadPresent(loc);
 		}
 		
 	}
 	
 	public void addPresent(Location loc) {
-		presents.add(loc);
+		presents.add(new Present("" + presents.size(), loc));
 		
 		ConfigurationSection section = getConfig().getConfigurationSection("presents");
 		
@@ -91,12 +99,39 @@ public class ChristmasEvent extends JavaPlugin{
 		CustomSkull.setBlock(loc, skins[new Random().nextInt(skins.length)]);
 	}
 	
-	public ArrayList<Location> getPresents() {
+	public ArrayList<Present> getPresents() {
 		return presents;
 	}
 
 	public boolean isPresent(Location loc) {
-		return presents.contains(loc);
+		for (Present p : presents) {
+			if (p.equals(loc)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public PlayerDataStore getPlayerStore(Player player) {
+		return service.getStore(player);
+	}
+	
+	public Present getPresent(Location loc) {
+		for (Present p : presents) {
+			if (p.equals(loc)) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
+	public boolean hasAlreadyCollected(Player p, Present present) {
+		String s = getPlayerStore(p).get("present." + present.getId());
+		return s == null ? false : Boolean.parseBoolean(s);
+	}
+	
+	public void collect(Player p, Present present) {
+		getPlayerStore(p).put("present." + present.getId(), "true");
 	}
 	
 	private Location loadLocation(ConfigurationSection section) {
