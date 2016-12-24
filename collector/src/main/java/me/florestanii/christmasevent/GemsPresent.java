@@ -28,5 +28,6 @@ public class GemsPresent extends Present {
     public void save(ConfigurationSection section) {
         super.save(section);
         section.set("type", "gems");
+        section.set("amount", amount);
     }
 }
