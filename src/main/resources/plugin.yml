@@ -1,7 +1,0 @@
-name: ChristmasEvent
-version: VERSION
-main: me.florestanii.christmasevent.ChristmasEvent
-softdepend: [PlayerDataStore]
-commands:
-  addpresent:
-    usage: /<command>
