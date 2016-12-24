@@ -1,4 +1,5 @@
 /bin/
-/target/
+/redeemer/target/
+/collector/target/
 /.idea/
 *.iml

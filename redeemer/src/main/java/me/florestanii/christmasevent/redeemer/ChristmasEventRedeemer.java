@@ -11,7 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class ChristmasEventRedeemer extends JavaPlugin implements Listener {
     private static final String SANTA_SKULL = "http://textures.minecraft.net/texture/8a159236d7512bdb4326a24e14502167b76bcd85c041931c2194201b17f5e7";
 
-    public ChristmasEventRedeemer() {
+    @Override
+    public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
     }
 
