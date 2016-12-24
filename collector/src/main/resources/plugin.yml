@@ -1,7 +1,7 @@
 name: ChristmasEvent
 version: VERSION
-main: me.florestanii.christmasevent.redeemer.ChristmasEvent
-softdepend: [PlayerDataStore]
+main: me.florestanii.christmasevent.ChristmasEvent
+depend: [PlayerDataStore, Vault, GemApi]
 commands:
   addpresent:
     usage: /<command>
