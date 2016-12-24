@@ -18,7 +18,7 @@ public class PresentParticles implements Runnable {
         i++;
         for (Player player : plugin.getServer().getOnlinePlayers()) {
             plugin.getPresents().stream()
-                    .filter((present) -> plugin.hasAlreadyCollected(player, present))
+                    .filter((present) -> !plugin.hasAlreadyCollected(player, present))
                     .forEach((present) -> {
                         if (player.getLocation().distanceSquared(present.getLocation()) <= 400) {
                             player.spigot().playEffect(
