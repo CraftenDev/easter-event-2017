@@ -1,6 +1,6 @@
-name: ChristmasEventRedeemer
+name: EasterEventRedeemer
 version: VERSION
-main: me.florestanii.christmasevent.redeemer.ChristmasEventRedeemer
+main: me.florestanii.easterevent.redeemer.EasterEventRedeemer
 depend: [PlayerDataStore]
 commands:
   addpresent:

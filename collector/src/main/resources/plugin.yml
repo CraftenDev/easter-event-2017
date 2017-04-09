@@ -1,7 +1,7 @@
-name: ChristmasEvent
+name: EasterEvent
 version: VERSION
-main: me.florestanii.christmasevent.ChristmasEvent
+main: me.florestanii.easterevent.EasterEvent
 depend: [PlayerDataStore, Vault, GemApi]
 commands:
-  addpresent:
+  addegg:
     usage: /<command>

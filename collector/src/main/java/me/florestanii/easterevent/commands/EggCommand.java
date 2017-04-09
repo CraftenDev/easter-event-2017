@@ -1,6 +1,7 @@
-package me.florestanii.christmasevent.commands;
+package me.florestanii.easterevent.commands;
 
-import me.florestanii.christmasevent.*;
+import me.florestanii.easterevent.*;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -8,33 +9,33 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class PresentCommand implements CommandExecutor {
-    private final ChristmasEvent plugin;
+public class EggCommand implements CommandExecutor {
+    private final EasterEvent plugin;
 
-    public PresentCommand(ChristmasEvent plugin) {
+    public EggCommand(EasterEvent plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            if (sender.hasPermission("christmasevent.present.add")) {
+            if (sender.hasPermission("easterevent.egg.add")) {
                 Player p = (Player) sender;
                 Location loc = p.getLocation().getBlock().getLocation();
-                Present present;
+                Egg egg;
                 switch (args[0].toLowerCase()) {
                     case "money":
-                        present = new MoneyPresent("" + System.currentTimeMillis(), loc, Integer.parseInt(args[1]));
+                        egg = new MoneyEgg("" + System.currentTimeMillis(), loc, Integer.parseInt(args[1]));
                         break;
                     case "gems":
-                        present = new GemsPresent("" + System.currentTimeMillis(), loc, Integer.parseInt(args[1]));
+                        egg = new GemsEgg("" + System.currentTimeMillis(), loc, Integer.parseInt(args[1]));
                         break;
                     default:
-                        present = new ItemPresent("" + System.currentTimeMillis(), loc);
+                        egg = new ItemEgg("item", loc);
                         break;
                 }
-                plugin.addPresent(present);
-                sender.sendMessage("Add present " + present.getId() + " at: " + loc.toString());
+                plugin.addEgg(egg);
+                sender.sendMessage("Add egg " + egg.getId() + " at: " + loc.toString());
             } else {
                 sender.sendMessage(ChatColor.DARK_RED + "You have no permission to use this command.");
             }

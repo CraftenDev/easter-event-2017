@@ -1,4 +1,4 @@
-package me.florestanii.christmasevent.redeemer;
+package me.florestanii.easterevent.redeemer;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;

@@ -1,4 +1,4 @@
-package me.florestanii.christmasevent.redeemer;
+package me.florestanii.easterevent.redeemer;
 
 import de.craften.plugins.playerdatastore.api.PlayerDataStore;
 import de.craften.plugins.playerdatastore.api.PlayerDataStoreService;
@@ -8,8 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class ChristmasEventRedeemer extends JavaPlugin implements Listener {
-    private static final String SANTA_SKULL = "http://textures.minecraft.net/texture/8a159236d7512bdb4326a24e14502167b76bcd85c041931c2194201b17f5e7";
+public class EasterEventRedeemer extends JavaPlugin implements Listener {
+    private static final String EASTER_BUNNY_SKULL = "http://textures.minecraft.net/texture/be50af50438affc65ce3b7a85b8e82cfbc3cab197c25d4a614230a2d1e0605d";
 
     @Override
     public void onEnable() {
@@ -18,12 +18,12 @@ public class ChristmasEventRedeemer extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        if ("true".equalsIgnoreCase(getPlayerStore(event.getPlayer()).get("xmas2016.present.1482606302203.redeem"))) {
-            event.getPlayer().getInventory().addItem(CustomSkull.getSkullUrl(SANTA_SKULL)).entrySet().forEach((e) -> {
+        if ("true".equalsIgnoreCase(getPlayerStore(event.getPlayer()).get("easter2017.egg.item.redeem"))) {
+            event.getPlayer().getInventory().addItem(CustomSkull.getSkullUrl(EASTER_BUNNY_SKULL)).entrySet().forEach((e) -> {
                 e.getValue().setAmount(e.getKey());
                 event.getPlayer().getWorld().dropItem(event.getPlayer().getLocation(), e.getValue());
             });
-            getPlayerStore(event.getPlayer()).remove("xmas2016.present.1482606302203.redeem");
+            getPlayerStore(event.getPlayer()).remove("easter2017.egg.item.redeem");
         }
     }
 

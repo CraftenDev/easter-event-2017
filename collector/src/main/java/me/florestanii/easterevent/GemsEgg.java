@@ -1,4 +1,4 @@
-package me.florestanii.christmasevent;
+package me.florestanii.easterevent;
 
 import me.mickyjou.plugins.gems.api.GemProvider;
 import org.bukkit.Bukkit;
@@ -7,10 +7,10 @@ import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
-public class GemsPresent extends Present {
+public class GemsEgg extends Egg {
     private final int amount;
 
-    public GemsPresent(String id, Location loc, int amount) {
+    public GemsEgg(String id, Location loc, int amount) {
         super(id, loc);
         this.amount = amount;
     }
@@ -21,7 +21,7 @@ public class GemsPresent extends Present {
                 .addGems(player, amount);
 
         player.sendMessage(ChatColor.GREEN + "Was gelitzert denn da? Sind das etwa...");
-        player.sendMessage(ChatColor.GREEN + "Das Gesch√§nk enth√§lt " + ChatColor.YELLOW + amount + " Gems" + ChatColor.GREEN + " f√ºr dich!");
+        player.sendMessage(ChatColor.GREEN + "Das Ei enth‰lt " + ChatColor.YELLOW + amount + " Gems" + ChatColor.GREEN + " f¸r dich!");
     }
 
     @Override
