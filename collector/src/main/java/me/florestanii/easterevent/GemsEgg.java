@@ -21,7 +21,7 @@ public class GemsEgg extends Egg {
                 .addGems(player, amount);
 
         player.sendMessage(ChatColor.GREEN + "Was gelitzert denn da? Sind das etwa...");
-        player.sendMessage(ChatColor.GREEN + "Das Ei enthält " + ChatColor.YELLOW + amount + " Gems" + ChatColor.GREEN + " für dich!");
+        player.sendMessage(ChatColor.GREEN + "Das Ei enthÃ¤lt " + ChatColor.YELLOW + amount + " Gems" + ChatColor.GREEN + " fÃ¼r dich!");
     }
 
     @Override

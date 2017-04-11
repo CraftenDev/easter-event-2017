@@ -19,8 +19,8 @@ public class MoneyEgg extends Egg {
         Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class).getProvider()
                 .depositPlayer(player, amount);
 
-        player.sendMessage(ChatColor.GREEN + "Das Ei enthält nur Geld, aber immerhin nett verpackt.");
-        player.sendMessage(ChatColor.GREEN + "Hier sind " + ChatColor.YELLOW + amount + " C" + ChatColor.GREEN + " für dich!");
+        player.sendMessage(ChatColor.GREEN + "Das Ei enthÃ¤lt nur Geld, aber immerhin nett verpackt.");
+        player.sendMessage(ChatColor.GREEN + "Hier sind " + ChatColor.YELLOW + amount + " C" + ChatColor.GREEN + " fÃ¼r dich!");
     }
 
     @Override

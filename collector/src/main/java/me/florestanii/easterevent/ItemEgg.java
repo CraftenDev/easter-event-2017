@@ -12,7 +12,7 @@ public class ItemEgg extends Egg {
 
     @Override
     public void open(Player player) {
-        player.sendMessage(ChatColor.GREEN + "Das Ei erh‰lst du auf dem Survival- oder Skyblock-Server, sobald du ihn betrittst!");
+        player.sendMessage(ChatColor.GREEN + "Das Ei erh√§lst du auf dem Survival- oder Skyblock-Server, sobald du ihn betrittst!");
         EasterEvent.getPlugin(EasterEvent.class).getPlayerStore(player).put("easter2017.egg." + getId() + ".redeem", "true");
     }
 
